@@ -25,7 +25,7 @@ const mongoSanitize = require('express-mongo-sanitize');
 const dbUrl = process.env.DB_URL;
 const MongoDBStore = require('connect-mongo');
 /*Connecting the app to MongoDB*/
-mongoose.connect('mongodb://localhost:27017/Played-It');
+mongoose.connect(dbUrl);
 //mongoose.connect(dbUrl);
 
 const db = mongoose.connection;
@@ -36,7 +36,7 @@ db.once('open', ()=>{
 
 
 const store = MongoDBStore.create({
-    mongoUrl: 'mongodb://localhost:27017/Played-It',
+    mongoUrl: dbUrl,
     touchAfter: 24 * 60 * 60,
     crypto: {
         secret: 'shh'
