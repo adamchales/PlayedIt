@@ -1,0 +1,18 @@
+<% layout('./layouts/boilerplate')%>
+<div class="row">
+    <div class="col-md-6 offset-md-3 col-xl-4 offset-xl-4 center">
+        <div class="card mb-3">
+            <div class="card-shadow">
+        <img src="<%=user.avi%>" alt="user avatar" class="img-thumbnail card-img-top">
+        </div>
+        <div class="card-body">
+            <ul class="list-group list-group-flush">
+            <h4 class="list-group-item font-weight-bold text-center"><%= user.displayName %></h4>
+            <p class="list-group-item"><%=user.platform%></p>
+            <p class="list-group-item"><%=user.bio%></p>
+            </ul>
+        </div>
+        </div>
+        </div>
+      
+            

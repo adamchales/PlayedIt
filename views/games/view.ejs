@@ -1,0 +1,89 @@
+<% layout('./layouts/boilerplate')%>
+<link rel="stylesheet" href='/javascript/stylesheets/stars.css'>
+        <!--This page will be used as a summary for the information on each game.
+        It includes an average rating, reviews and comments left
+        by users.-->
+        <div class="row">
+            <div class="col-6">
+                <div class="card mb-3">
+                <% for(let img of game.images) {%>
+                    <img src="<%=img.url%>" class="card-img-top" alt="...">
+                    <%}%>
+                <div>
+                    <ul class="list-group list-group-flush">
+                    <h4 class="list-group-item font-weight-bold"><%=game.title%></h4>
+                    <li class="list-group-item">
+                        <% for(let i = 0; i < 5; i++) { %>
+                            <% if(i < floorRating) { %>
+                            <i class="fas fa-star"></i>
+                          <% } else if((game.avgRating - i) > 0 && (game.avgRating - i) < 1) { %>
+                              <i class="fas fa-star-half-alt"></i>
+                            <% } else { %>
+                            <i class="far fa-star"></i>
+                            <% } %>
+                        <% } %>
+                        <%= `${game.avgRating} star${game.avgRating === 1 ? '' : 's'}` %>
+                            </li>
+                    <li class="list-group-item"><%= game.platform%></li>
+                    <li class="list-group-item"><%= game.genre%></li>
+                    <li class="list-group-item"><%=  game.releaseYear%></li>
+        <!--The delete function and edit function will be restricted to
+        authorized admin users-->
+        <% if(currentUser && game.author.equals(currentUser._id) || currentUser && currentUser.isAdmin){%>
+        <div class="card-body btn-toolbar text-center">
+        <a class="btn btn-info" style="margin-right: 15px" href="/games/<%=game._id%>/edit">Edit</a>
+        <form action="/games/<%=game._id%>?_method=DELETE" method="POST">
+        <button class="btn btn-danger">Delete</button>
+            </form>
+            </div>
+        <%}%>
+        </div>
+        </div>
+        </div>
+        <div class="col-6">
+            <% if(currentUser){%>
+        <form action="/games/<%=game._id%>/reviews" method="POST" novalidate class="valid-form mb-3">
+            <div class="mb-3">
+                <label for="body">Review</label>
+                <textarea class="form-control" name="review[body]" id="body" cols="30" rows="5" required>
+                </textarea>
+            </div>
+            <fieldset class="starability-basic mb-2" >
+                <legend>Rating:</legend>
+                <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="0" checked aria-label="No rating." />
+                <input type="radio" id="first-rate1" name="review[rating]" value="1" />
+                <label for="first-rate1" title="Terrible">1 star</label>
+                <input type="radio" id="first-rate2" name="review[rating]" value="2" />
+                <label for="first-rate2" title="Not good">2 stars</label>
+                <input type="radio" id="first-rate3" name="review[rating]" value="3" />
+                <label for="first-rate3" title="Average">3 stars</label>
+                <input type="radio" id="first-rate4" name="review[rating]" value="4" />
+                <label for="first-rate4" title="Very good">4 stars</label>
+                <input type="radio" id="first-rate5" name="review[rating]" value="5" />
+                <label for="first-rate5" title="Amazing">5 stars</label>
+              </fieldset>
+            <button class="btn btn-success">Submit review</button>
+        </form>
+        <%}%>
+        <% for(let review of game.reviews) {%>
+        <div class="col-10">
+        <div class="card mb-3">
+            <div class="card-body">
+                <p class="starability-result" data-rating="<%=review.rating%>">
+                    Rated:<%=review.rating%>
+                  </p>
+                <h4 class="card-subtitle mb-2 text-muted">By: <%= review.author.displayName%></h4>
+                <p class="card-text">Review: <%=review.body%></p>
+            <% if(currentUser && review.author.equals(currentUser._id) || currentUser && currentUser.isAdmin){%>
+            <form action="/games/<%=game._id%>/reviews/<%=review._id%>?_method=DELETE" method="POST">
+            <button class="btn sm btn-danger">Delete</button>
+            </form>
+            <%}%>
+            </div>
+            </div>
+        </div>
+        <%}%>
+        </div>
+        </div>
+        </div>
+        </div>

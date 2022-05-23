@@ -1,0 +1,47 @@
+<% layout('layouts/boilerplate') %>
+<div class="container d-flex justify-content-center align-items-center mt-5">
+    <div class="flex-fill">
+<div class="row">
+    <div class="card col-md-6 offset-md-3 col-xl-4 offset-xl-4 mb-3">
+    <h4 class="card-title mt-3">New User</h4>
+    <form action="/register" method="POST" novalidate class="valid-form" enctype="multipart/form-data">
+        <div class="card-text mb-3">
+            <label class="form-label" for="username">Username</label>
+            <input class="form-control" type="text" id="username" name="username" required>
+        </div>
+        <div class="card-text mb-3"> 
+            <label class="form-label" for="email">Email</label>
+            <input class="form-control" type="email" id="email" name="email" required>
+        </div>
+        <div class="card-text mb-3"> 
+            <label class="form-label" for="displayName">Display Name</label>
+            <input class="form-control" type="text" id="displayName" name="displayName" required>
+        </div>
+        <div class="card-text mb-3"> 
+            <label class="form-label" for="avi">Avatar URL</label>
+            <input class="form-control" type="text" name="avi" id="avi">
+        </div>
+        <div class="card-text mb-3"> 
+            <label class="form-label" for="password">Password</label>
+            <input class="form-control" type="password" id="password" name="password" required>
+        </div>
+        <div class="card-text mb-3">
+            <label class="form-label" for="admincode">Administrator Code</label>
+            <input class="form-control" type="text" id="admincode" name="admincode">
+        </div>
+        <div class="card-text mb-3">
+            <label class="form-label" for="bio">About me:</label>
+            <textarea class="form-control" id="bio" name="bio"></textarea>
+        </div>
+        <div class="card-text mb-3">
+            <label class="form-label" for="platforms">Platforms:</label>
+            <textarea class="form-control" id="platform" name="platform"></textarea>
+        </div>
+        <div class="text-center">
+        <button class="btn btn-success mb-3">Submit!</button>
+    </div>
+    </form>
+    </div>
+    </div>
+</div>
+</div>

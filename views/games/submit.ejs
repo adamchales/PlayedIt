@@ -1,0 +1,33 @@
+<% layout('./layouts/boilerplate')%>
+    <!--This page is to submit a game that is not already part of the database-->
+    <div class="row">
+        <div class="card col-6 offset-3 col-xl-4 offset-xl-4">
+            <h1 class="card-title text-center">New Game</h1>
+        <form action="/games" method="POST" novalidate class="valid-form" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label class="form-label" for="title">Title</label>
+                <input class="form-control" type="text" id="title" name="game[title]" required>
+            </div>
+            <div class="mb-3"> 
+                <label class="form-label" for="platform">Platform</label>
+                <input class="form-control" type="text" id="platform" name="game[platform]" required>
+            </div>
+            <div class="mb-3"> 
+                <label class="form-label" for="image">Image</label>
+                <input type="file" name="image" id="image" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="genre">Genre</label>
+                <input class="form-control" type="text" id="genre" name="game[genre]" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="releaseYear">Release Year</label>
+                <input class="form-control" type="text" id="releaseYear" name="game[releaseYear]" required>
+            </div>            
+            <div class="mb-3 text-center">
+            <button class="btn btn-success">Submit!</button>
+            </div>
+        </form>
+        </div>
+        </div>
+   

@@ -1,0 +1,36 @@
+<% layout('./layouts/boilerplate')%>
+    <!--This page will be for editing existing games; will be
+    restricted to authorized users only to ensure data is correct-->
+    
+<div class="row">
+    <div class="card col-md-6 offset-md-3 col-xl-4 offset-xl-4">
+        <h2 class="card-title text-center mb-3">Edit Game</h1>
+        <form action="/games/<%-game._id%>?_method=PUT" method="POST" novalidate class="valid-form"
+            enctype="multipart/form-data">
+            <div class="mb-3">
+                <label class="form-label" for="title">Title</label>
+                <input class="form-control" type="text" id="title" name="game[title]" value="<%=game.title%>" required>
+            </div>
+            <div class="mb-3"> 
+                <label class="form-label" for="image">Add image</label>
+                <input class="form-control" type="file" name="image" id="image">
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="">Platform</label>
+                <input class="form-control" type="text" id="platform" name="game[platform]" value="<%=game.platform%>" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="">Genre</label>
+                <input class="form-control" type="text" id="genre" name="game[genre]" value="<%=game.genre%>" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="">Release Year</label>
+                <input class="form-control" type="text" id="releaseYear" name="game[releaseYear]" value="<%=game.releaseYear%>" required>
+            </div>
+            <div class="text-center">
+            <button class=" btn btn-info mb-3">Update game!</button>
+            </div>
+        </form>
+        </div>
+        </div>
+        </div>

@@ -1,0 +1,44 @@
+<nav class="navbar sticky-top navbar-expand-xl navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/games">Played It!</a>
+      <!--displays current username if logged in and login prompts if not-->
+      <% if(currentUser){%>
+        <span class="navbar-text ms-auto me-5">
+          <a href="/users/<%=currentUser.id%>"><%= currentUser.displayName%></a>
+          </span>
+          <%}%>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <% if(!currentUser) {%>
+            <a class="nav-link active" aria-current="page" href="/login">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/register">Register</a>
+          </li>
+          <%} else {%>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/logout">Logout</a>
+          </li>
+          <%}%>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Games
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <li><a class="dropdown-item" href="/games">Browse all games</a></li>
+              <li><a class="dropdown-item" href="/games/submit">Submit a game</a></li>
+            </ul>
+        </ul>
+        <form action="/games" method="GET" class="d-flex">
+            <input class="form-control me-2" name="search" type="text" placeholder="Search by title..." aria-label="Search">
+            <button class="btn dark btn-outline-success" type="submit">Search</button>
+          </form>
+      </div>
+    </div>
+  </nav>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
