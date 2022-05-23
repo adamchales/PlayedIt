@@ -34,12 +34,13 @@ db.once('open', ()=>{
     console.log('Connected to database!')
 });
 
+const secret = process.env.SECRET || 'shh'
 
 const store = MongoDBStore.create({
     mongoUrl: dbUrl,
     touchAfter: 24 * 60 * 60,
     crypto: {
-        secret: 'shh'
+        secret,
     }
 });
 
@@ -49,7 +50,7 @@ store.on('error', function(e){
 
 const sessionConfig = {
     store,
-    secret: 'temp',
+    secret,
     resave: false,
     saveUninitialized: true,
     cookie:{
