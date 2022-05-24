@@ -1,4 +1,4 @@
-require('dotenv').config({path: require('find-config')('.env')});
+require('dotenv').config();
 
 
 const express = require('express');
@@ -53,7 +53,7 @@ app.use(mongoSanitize());
 const secret = process.env.SECRET || 'shh'
 
 const store = MongoStore.create({
-    mongoUrl: dbUrl,
+    url: dbUrl,
     secret,
     touchAfter: 24 * 60 * 60
 });
