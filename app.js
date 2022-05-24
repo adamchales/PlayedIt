@@ -37,11 +37,8 @@ db.once('open', ()=>{
 const secret = process.env.SECRET || 'shh'
 
 const store = new MongoStore({
-    mongooseConnection: dbUrl,
-    touchAfter: 24 * 60 * 60,
-    crypto: {
-        secret,
-    }
+    url: dbUrl,
+    touchAfter: 24 * 60 * 60
 });
 
 store.on('error', function(e){
