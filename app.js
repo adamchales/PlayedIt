@@ -36,12 +36,6 @@ db.once('open', ()=>{
 
 const secret = process.env.SECRET || 'shh'
 
-
-store.on('error', function(e){
-    console.log('session error!', e)
-});
-
-
 /*Express connection and functionality*/
 const app = express();
 
