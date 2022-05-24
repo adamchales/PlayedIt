@@ -50,12 +50,7 @@ app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(mongoSanitize()); 
 
-const secret = process.env.SECRET || 'shh'
-
-
-store.on('error', function(e){
-    console.log('session error!', e)
-});
+const secret = process.env.SECRET || 'shh';
 
 const sessionConfig = {
     store: MongoStore.create({
