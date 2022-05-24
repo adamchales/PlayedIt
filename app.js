@@ -52,7 +52,8 @@ app.use(mongoSanitize());
 
 const secret = process.env.SECRET || 'shh';
 
-const sessionConfig = {
+
+app.use(session({
     store: MongoStore.create({
         MongoUrl: dbUrl,
         touchAfter: 24 * 60 * 60,
@@ -68,10 +69,7 @@ const sessionConfig = {
         httpOnly: true,
         expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
     }
-}
-
-
-app.use(session(sessionConfig));
+}));
 app.use(flash());
 
 
