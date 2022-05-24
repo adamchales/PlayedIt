@@ -24,7 +24,7 @@ const review = require('./models/review');
 const mongoSanitize = require('express-mongo-sanitize');
 const MongoDBStore = require('connect-mongo')(session);
 
-const dbUrl = 'mongodb+srv://beginneruser:rHjr3QlfH1Yr78Ka@cluster0.yq7k6.mongodb.net/?retryWrites=true&w=majority';
+const dbUrl = process.env.DB_URL
 
 /*Connecting the app to MongoDB*/
 mongoose.connect(dbUrl);
