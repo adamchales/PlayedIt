@@ -38,6 +38,7 @@ const secret = process.env.SECRET || 'shh'
 
 const store = new MongoStore({
     url: dbUrl,
+    secret,
     touchAfter: 24 * 60 * 60
 });
 
@@ -47,6 +48,7 @@ store.on('error', function(e){
 
 const sessionConfig = {
     store,
+    name: 'session',
     secret,
     resave: false,
     saveUninitialized: true,
