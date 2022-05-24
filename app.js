@@ -22,7 +22,7 @@ const res = require('express/lib/response');
 const game = require('./models/game');
 const review = require('./models/review');
 const mongoSanitize = require('express-mongo-sanitize');
-const MongoDBStore = require('connect-mongo');
+const MongoStore = require('connect-mongo')(session);
 
 const dbUrl = process.env.DB_URL;
 
@@ -54,7 +54,7 @@ const secret = process.env.SECRET || 'shh';
 
 
 app.use(session({
-    store: new MongoDBStore({
+    store: new MongoStore({
         url: dbUrl,
         touchAfter: 24 * 60 * 60,
         secret: secret,
