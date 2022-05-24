@@ -36,7 +36,7 @@ db.once('open', ()=>{
 
 const secret = process.env.SECRET || 'shh'
 
-const store = MongoStore.create({
+const store = new MongoStore({
     mongoUrl: dbUrl,
     touchAfter: 24 * 60 * 60,
     crypto: {
