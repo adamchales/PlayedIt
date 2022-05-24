@@ -54,7 +54,7 @@ const secret = process.env.SECRET || 'shh';
 
 
 app.use(session({
-    store: MongoStore.create({
+    store: new MongoStore({
         MongoUrl: dbUrl,
         touchAfter: 24 * 60 * 60,
         crypto: {
