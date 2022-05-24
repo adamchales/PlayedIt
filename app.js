@@ -22,7 +22,7 @@ const res = require('express/lib/response');
 const game = require('./models/game');
 const review = require('./models/review');
 const mongoSanitize = require('express-mongo-sanitize');
-const MongoDBStore = require('connect-mongo')(session);
+const MongoDBStore = require('connect-mongo');
 
 const dbUrl = process.env.DB_URL
 
