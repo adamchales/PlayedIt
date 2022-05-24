@@ -23,7 +23,7 @@ const game = require('./models/game');
 const review = require('./models/review');
 const mongoSanitize = require('express-mongo-sanitize');
 const dbUrl = process.env.DB_URL;
-const MongoDBStore = require('connect-mongo');
+const MongoDBStore = require('connect-mongo')(session);
 /*Connecting the app to MongoDB*/
 mongoose.connect(dbUrl);
 //mongoose.connect(dbUrl);
