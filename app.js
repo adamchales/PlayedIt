@@ -22,8 +22,10 @@ const res = require('express/lib/response');
 const game = require('./models/game');
 const review = require('./models/review');
 const mongoSanitize = require('express-mongo-sanitize');
-const dbUrl = process.env.DB_URL;
 const MongoDBStore = require('connect-mongo')(session);
+
+const dbUrl = process.env.DB_URL;
+
 /*Connecting the app to MongoDB*/
 mongoose.connect(dbUrl);
 //mongoose.connect(dbUrl);
@@ -33,6 +35,20 @@ db.on('error', console.error.bind(console, 'Connection error!'));
 db.once('open', ()=>{
     console.log('Connected to database!')
 });
+
+
+/*Express connection and functionality*/
+const app = express();
+
+app.engine('ejs', ejsMate);
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
+
+
+app.use(express.urlencoded({extended:true}));
+app.use(methodOverride('_method'));
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(mongoSanitize()); 
 
 const secret = process.env.SECRET || 'shh'
 
@@ -57,18 +73,6 @@ const sessionConfig = {
         expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
     }
 }
-/*Express connection and functionality*/
-const app = express();
-
-app.engine('ejs', ejsMate);
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
-
-
-app.use(express.urlencoded({extended:true}));
-app.use(methodOverride('_method'));
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(mongoSanitize()); 
 
 
 app.use(session(sessionConfig));
