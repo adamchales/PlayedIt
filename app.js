@@ -23,7 +23,7 @@ const game = require('./models/game');
 const review = require('./models/review');
 const mongoSanitize = require('express-mongo-sanitize');
 const dbUrl = process.env.DB_URL;
-const MongoStore = require('connect-mongo');
+const MongoDBStore = require('connect-mongo');
 /*Connecting the app to MongoDB*/
 mongoose.connect(dbUrl);
 //mongoose.connect(dbUrl);
@@ -36,7 +36,7 @@ db.once('open', ()=>{
 
 const secret = process.env.SECRET || 'shh'
 
-const store = new MongoStore({
+const store = new MongoDBStore({
     url: dbUrl,
     secret,
     touchAfter: 24 * 60 * 60
