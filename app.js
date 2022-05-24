@@ -52,21 +52,19 @@ app.use(mongoSanitize());
 
 const secret = process.env.SECRET || 'shh'
 
-const store = MongoStore.create({
-    MongoUrl: dbUrl,
-    touchAfter: 24 * 60 * 60,
-    crypto: {
-        secret: secret,
-    },
-    
-});
 
 store.on('error', function(e){
     console.log('session error!', e)
 });
 
 const sessionConfig = {
-    store: store,
+    store: MongoStore.create({
+        MongoUrl: dbUrl,
+        touchAfter: 24 * 60 * 60,
+        crypto: {
+            secret: secret,
+        }
+    }),
     name: 'session',
     secret,
     resave: false,
