@@ -50,7 +50,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(mongoSanitize()); 
 
 
-app.use(express.session({
+app.use(session({
         name: 'session',
         secret,
         resave: false,
