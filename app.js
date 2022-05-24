@@ -36,6 +36,27 @@ db.once('open', ()=>{
 
 const secret = process.env.SECRET || 'shh'
 
+const store = new MongoStore({
+    url: dbUrl,
+    secret,
+    touchAfter: 24 * 60 * 60
+});
+
+store.on('error', function(e){
+    console.log('session error!', e)
+});
+
+const sessionConfig = {
+    store,
+    name: 'session',
+    secret,
+    resave: false,
+    saveUninitialized: true,
+    cookie:{
+        httpOnly: true,
+        expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
+    }
+}
 /*Express connection and functionality*/
 const app = express();
 
@@ -50,21 +71,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(mongoSanitize()); 
 
 
-app.use(session({
-        name: 'session',
-        secret,
-        resave: false,
-        saveUninitialized: true,
-        store: MongoStore.create({
-            mongoUrl: dbUrl,
-            touchAfter: 24 * 60 * 60
-        }),
-        cookie:{
-            httpOnly: true,
-            expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
-        }
-    }
-));
+app.use(session(sessionConfig));
 app.use(flash());
 
 
