@@ -52,7 +52,7 @@ app.use(mongoSanitize());
 
 const secret = process.env.SECRET || 'shh'
 
-const store = new MongoDBStore({
+const store = MongoDBStore.create({
     url: dbUrl,
     secret,
     touchAfter: 24 * 60 * 60
